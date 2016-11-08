@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-autowire="byName"  xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p"
+	 xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		 http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd" >
+	
+ 	<!-- 配置自动扫描的包 -->
+	<!--  <context:component-scan base-package="com.ping" use-default-filters="false">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>  -->
+	
+		<!-- 自动去扫描base-pack下面或者子包下面的java文件，如果扫描到有@Component @Controller@Service等这些注解的类，则把这些类注册为bean -->
+	  <context:component-scan base-package="com.ping" />  
+	     <!-- 相当于注册了DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean，配置一些messageconverter。即解决了@Controller注解的使用前提配置。 -->
+   		<mvc:annotation-driven />
+
+		<!-- 1.配置数据源 -->
+		<!-- <context:property-placeholder location="classpath:db.properties"/> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="username" value="root"></property>
+	<property name="password" value="123456"></property>
+	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	<property name="url" value="jdbc:mysql://localhost:3306/myexample?useUnicode=true&amp;characterEncoding=utf8"></property>
+	
+    <!-- 连接初始值，连接池启动时创建的连接数量的初始值 -->  
+    <property name="initialSize" value="5"></property>  
+    <!-- 连接池的最大值，同一时间可以从池分配的最多连接数量，0时无限制 -->  
+    <property name="maxActive" value="30"></property>  
+    <!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 ，0时无限制-->  
+    <property name="maxIdle" value="20"></property>  
+    <!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->  
+    <property name="minIdle" value="1"></property>  
+    <!-- 设置在自动回收超时连接的时候打印连接的超时错误  -->    
+    <property name="logAbandoned" value="true"/>    
+    <!-- 设置自动回收超时连接 -->    
+    <property name="removeAbandoned"  value="true"/>   
+    <!-- 自动回收超时时间(以秒数为单位) -->    
+    <property name="removeAbandonedTimeout" value="10"/>   
+       
+    <!-- 超时等待时间以毫秒为单位  -->    
+    <property name="maxWait" value="100"/>  
+	
+	</bean>
+		<!-- 配置sessionFactory  org.springframework.orm.hibernate4.LocalSessionFactoryBean -->
+	  <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+			<!-- 配置数据源 -->
+			<property name="dataSource" ref="dataSource"></property>
+			<!-- <property name="namingStrategy">
+				<bean class="org.hibernate.cfg.ImprovedNamingStrategy"></bean>
+			</property>  -->
+			<!-- 扫描的实体包 -->
+			<property name="packagesToScan" value="com.ping.domain"></property>
+			
+			<!-- 配置Hibernate的常用属性 -->
+			<property name="hibernateProperties">
+				<props>
+				<!-- 数据库的方言 -->
+					<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.format_sql">true</prop>
+					<prop key="hibernate.hbm2ddl.auto">update</prop>
+				</props>
+			
+			</property>
+			
+		</bean>
+				
+		<!-- 配置hibernate事务管理器 org.springframework.orm.hibernate4.HibernateTransactionManager -->
+		<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">			 
+			<property name="sessionFactory" ref="sessionFactory"></property>
+			<!-- 自动注入sqlsessionfactory -->
+		</bean> 
+			
+		  <tx:annotation-driven transaction-manager="transactionManager" /> 
+
+		<!-- <tx:annotation-driven /> 		 -->	 		
+		<!-- 4.配置事务属性，事务的传播特性 -->
+	<!--  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+			<tx:attributes>
+				<tx:method name="get" read-only="true"/>
+				<tx:method name="query" read-only="true"/>
+				<tx:method name="ad*" propagation="REQUIRED"/>
+				<tx:method name="updat*" propagation="REQUIRED"/>
+				<tx:method name="del*" propagation="REQUIRED"/>
+				<tx:method name="save*" propagation="REQUIRED" />
+		        <tx:method name="add*" propagation="REQUIRED" />
+		        <tx:method name="create*" propagation="REQUIRED" />
+		        <tx:method name="insert*" propagation="REQUIRED" />
+		        <tx:method name="update*" propagation="REQUIRED" />
+		        <tx:method name="merge*" propagation="REQUIRED" />
+		        <tx:method name="del*" propagation="REQUIRED" />
+		        <tx:method name="remove*" propagation="REQUIRED" />
+		        <tx:method name="put*" propagation="REQUIRED" />
+		        <tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+		        <tx:method name="count*" propagation="SUPPORTS" read-only="true" />
+		        <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+		        <tx:method name="list*" propagation="SUPPORTS" read-only="true" />
+		        <tx:method name="*" propagation="SUPPORTS" read-only="true" />
+			</tx:attributes>	
+		</tx:advice> -->
+	
+		<!-- 5配置事务的切点AOP，并把切点和事务属性关联起来 -->
+		
+		 <!-- <aop:config>
+			<aop:pointcut expression="execution(* com.bjpowernode.drp.service.*.*(..))" id="allManagerMethod"/>
+			
+			<aop:advisor advice-ref="txAdvice" pointcut-ref="allManagerMethod"/>
+		</aop:config>  -->
+  
+	<!-- 静态资源访问 -->
+   	<mvc:resources location="/static/js/" mapping="/static/js/**"/>
+   	<mvc:resources location="/static/fonts/" mapping="/static/fonts/**"/>
+   	<mvc:resources location="/static/css/" mapping="/static/css/**"/>
+   	
+   	
+   	 	
+<!-- 	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="10485760000" />
+		<property name="maxInMemorySize" value="4096" />
+	</bean>
+
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="zh"></property>
+	</bean>
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
+	</mvc:interceptors>
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="i18n/message" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+   	 -->
+ 
+</beans>

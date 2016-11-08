@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/manager/decorators">    <!-- 装饰文件所在的目录 -->   
+     <excludes>
+     <!-- 排除的是相对于url目录层次的，而非文件所在的目录！ -->
+	     <pattern>/dorm/Login</pattern> 
+	     <pattern>/dorm/LoginOut</pattern> 
+	       <pattern>/dorm/LoginSuccess</pattern>
+	      <pattern>/dorm/logincode</pattern>
+	     <pattern>/manager/showallviolationlist</pattern>
+	     <pattern>/manager/addviolation</pattern>
+	     <pattern>/manager/showallsuggestionlist</pattern>
+	     <pattern>/manager/list</pattern>	  
+	     <pattern>/manager/listroll</pattern>
+	     <pattern>/manager/listinfor</pattern>
+	       <pattern>/student/showpprove</pattern>
+	       
+	      	   	    
+     </excludes>
+     
+     <decorator name="decorator" page="decorator.jsp">  <!-- 装饰文件 -->
+       <pattern>/manager/*</pattern>  
+     </decorator>  
+     <decorator name="students" page="students.jsp">  <!-- 装饰文件 -->
+       <pattern>/student/*</pattern>  
+     </decorator> 
+</decorators>
