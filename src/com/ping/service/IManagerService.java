@@ -39,6 +39,8 @@ public interface IManagerService {
 	public List<Violation> getviolation(String name);
 	public List<Violation> getallviolation();
 	public PageBean getPageViolation(QueryInfo info);
+	public void editViolation(Violation v);
+	public Violation getvioaltionbyid(Integer violationId);
 	
 	/*投诉建议*/
 	public void savesuggestion(Suggestion s);

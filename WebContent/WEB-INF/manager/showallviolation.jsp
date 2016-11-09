@@ -37,11 +37,34 @@
 			var row=$('#dg').datagrid('getSelected');
 			if(row){
 				$("#dlg").dialog('open').dialog('setTitle','编辑用户');
-				$("#name").val(row.name);
-				$("#phone").val(row.phone);
-				$("#email").val(row.email);
-				$("#qq").val(row.qq);
-				url='user!save?id='+row.id;
+				$("#violationstuNumber").val(row.violationstuNumber);
+				$("#violationstuName").val(row.violationstuName);
+				$("#violationHappentime").val(row.violationHappentime);
+				$("#violationEnteringtime").val(row.violationEnteringtime);
+				$("#violationDeregulation").val(row.violationDeregulation);
+				$("#violationType").val(row.violationType);
+				var violationId=$("#violationId").val(row.violationId);
+				url='/myExample/manager/editviolation';
+				
+			/* 	$.ajax({  
+	                method :'post',  
+	                url :'/myExample/manager/editviolation',  
+	                data:{      
+	                    "violationId": row.violationId/* ,
+	                    
+	                },   
+	                dataType : 'json',  
+	                success : function(data) {  
+	                    if(data){  
+	                        $('#goods_tab').datagrid('reload');   
+	                    }else{  
+	                        $.messager.alert('提示','更改同步状态失败！');  
+	                    }  
+	                },  
+	                error : function() {  
+	                    $.messager.alert('警告','更改同步状态异常！');  
+	                }  
+	            });   */
 			}
 		}
 		
@@ -49,6 +72,7 @@
 		function saveUser(){
 			$('#fm').form('submit',{
 				url:url,
+				
 				onSubmit:function(){
 					return $(this).form('validate');
 				},

@@ -43,7 +43,7 @@
                         <ul class="list">
                             <li><a href="${pageContext.request.contextPath}/student/showviolation">违规信息查询</a> </li>                         
                             <li><a href="${pageContext.request.contextPath}/student/showsuggestionpage">投诉建议</a> </li>
-                        	 <li><a href="${pageContext.request.contextPath}/student/showpprove">打印居住证明</a> </li>
+                        	 <li><a href="${pageContext.request.contextPath}/student/showpprove" >打印居住证明</a> </li>
                         </ul>
                  
                 </div>

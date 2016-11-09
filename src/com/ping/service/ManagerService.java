@@ -141,6 +141,11 @@ public class ManagerService implements IManagerService {
 	public List<Violation> getviolation(String name){
 		return ivdao.getViolation(name);
 	}
+	
+	public Violation getvioaltionbyid(Integer violationId){
+		return ivdao.getViolationbyId(violationId);
+	}
+	
 	public List<Violation> getallviolation(){
 		return ivdao.getAllViolation();
 	}
@@ -157,6 +162,10 @@ public class ManagerService implements IManagerService {
 		
 	}
 	
+	public void editViolation(Violation v){
+		ivdao.editViolation(v);
+	}
+	
 	/*投诉建议*/
 	public void savesuggestion(Suggestion s){
 		isgdao.saveSuggestion(s);
@@ -167,6 +176,7 @@ public class ManagerService implements IManagerService {
 	public List<Suggestion> getallsuggestion(){
 		return isgdao.getAllSuggestion();
 	}
+	
 	
 	public PageBean getpagesuggestion(QueryInfo info){
 		PageBean pb=new PageBean();

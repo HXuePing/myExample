@@ -11,7 +11,7 @@
     <div title="学生信息添加" style="padding:10px;margin-left: 160px;">
         <div style="margin:5px 0px;"></div>
         <div class="easyui-panel" title="" style="width:500px;padding:18px 90px;">
-        <form  action="${pageContext.request.contextPath}/manager/addStudentBase" method="post" id="signupForm"  >
+        <form  action="${pageContext.request.contextPath}/manager/addStudentBase" method="post" id="signupForm"  enctype="multipart/form-data">
             <div style="margin-bottom:1px">
                 <div><label for="stuNumber">学号:</label></div>
                 <input type="text" name="stuNumber"  id="stuNumber" class="easyui-textbox" style="width:75%;height:22px" />
@@ -50,19 +50,23 @@
                 <input type="text" name="stuTutor"  id="stuTutor" class="easyui-textbox" style="width:75%;height:22px">
 
             </div>
+            
             <div style="margin-bottom:1px">
                 <div><label for="stuTutorPhone">班导师电话:</label></div>
                 <input type="text" name="stuTutorPhone"  id="stuTutorPhone" class="easyui-textbox" style="width:75%;height:22px">
 
             </div>
-
+				 <div class="form-group">
+					    <label for="exampleInputFile" class="control-label">选择上传图片</label>
+					    <input type="file" id="exampleInputFile" name="file" class="form-control">
+					  </div>
             <div style="margin-bottom:1px">
                 <div style="margin-top: 18px;margin-left: 50px">
                    <button  class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</button>
                    <!--  <a href="#" class="easyui-linkbutton" role="button" data-options="iconCls:'icon-save'">Save</a> -->
                 </div>
             </div>
-
+ 			
         </form>
             </div>
     </div>

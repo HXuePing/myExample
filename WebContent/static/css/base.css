@@ -9,6 +9,7 @@ ul li{
 #header{
     height: 60px;
     background-color: #88B8FF;
+    width: 100%;
 }
 #logo{
     width:75px;
@@ -110,6 +111,7 @@ a:active {
 #footer{
     height: 50px;
     background-color: #88B8FF;
+    width: 100%;
    
 }
 #footer-aa{
@@ -117,17 +119,17 @@ a:active {
 }
 
 #right{   
-    width:1110px;
+  //  width:1110px;
+   width:900px;
      height: 490px;
      float: left;
     
-  
 }
 #right-text1{
      width: 600px;
     height: 60px;
  	background-image: url("../images/text.jpg"); 
- 	float:right;
+ //	float:right;
  	margin: 190px 210px;
 
 }

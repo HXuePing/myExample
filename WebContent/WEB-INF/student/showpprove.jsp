@@ -5,26 +5,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
     <script type="text/javascript">
        
-        function Print() {
+       
 
-            var tit = document.title;
+		$(function(){
+			  var cur = new Date();
+			  var y = cur.getFullYear();
+		       var m = cur.getMonth()+1;
+		       var d = cur.getDate(); 
+		       $("#text").html(y+" 年"+m+"月"+d+"日");   
 
-            document.title = "";
+				$("#btn1").click(function(){
+					 var tit = document.title;
 
-            btn1.style.display = "none";
-            btn2.style.display="none";
-            text1.style.display="none";
-            window.print();
+			            document.title = "";
 
-            document.title = tit;
+			            btn1.style.display = "none";
+			         /*    btn2.style.display="none"; */
+			            text1.style.display="none";
+			            window.print();
 
-            btn1.style.display = "";
-            btn2.style.display="";
-            text1.style.display="";
-        }
+			            document.title = tit;
+
+			            btn1.style.display = "";
+			          /*   btn2.style.display=""; */
+			            text1.style.display="";
+			          
+
+					});
+
+
+				$("#btn2").click(function(){
+					
+			         
+					});		
+		       
+			});
+        
        </script>
+       
         </head>
 <body>
  <table     class="CContent">	                	
@@ -38,7 +59,7 @@
                 AC_AX_RunContent( 'id','WebBrowser','classid','CLSID:8856F961-340A-11D0-A96B-00C04FD705A2','height','0','width','0','viewastext','VIEWASTEXT' ); //end AC code
             </script><noscript><OBJECT   id="WebBrowser"   classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"   height="0"   width="0"   VIEWASTEXT></OBJECT></noscript>
             <input type="submit" onclick="Print()" value="打印"  id="btn1"/>
-            <input type="button" value="返回" onclick="ret(0)" id="btn2" />
+          <!--   <input type="button" value="返回" onclick="ret(0)" id="btn2" />  -->
             <br />
             <div style="font-size:16px;" id="text1">
                 打印说明：<br />
@@ -77,6 +98,11 @@
                                         五邑大学计算机学院					</FONT>
                                 </td>
                             </tr>
+                          <tr>
+                                <td align="right">
+                                    <FONT  id="text" style="FONT-SIZE:20pt;filter:alpha(opacity=100,style=3);WIDTH:100%; LINE-HEIGHT:150%">
+                                        					</FONT>
+                                </td>
                             </tr>
                             <tr>
                                 <td align="right">

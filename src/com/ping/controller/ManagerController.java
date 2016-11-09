@@ -1,9 +1,11 @@
 package com.ping.controller;
 
 
+import java.io.File;
 import java.text.ParseException;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +55,24 @@ public class ManagerController {
 	
 	
 	@RequestMapping(value="/addStudentBase")
-	public String addStudentBase(Student s,Model model){	
+	public String addStudentBase(@RequestParam(value = "file", required = false) MultipartFile file, HttpSession session,Student s,Model model){	
+		  String path = session.getServletContext().getRealPath("upload");  
+	        String fileName = file.getOriginalFilename();  
+	        String savefilename=UUID.randomUUID().toString()+fileName;
+	        File targetFile = new File(path, savefilename);  
+	        System.out.println("==========="+path);
+	        System.out.println("==========="+savefilename);
+	        if(!targetFile.exists()){  
+	            targetFile.mkdirs();  
+	        }  
+	        //保存  
+	        try {  
+	            file.transferTo(targetFile);  
+	            s.setStuImage(savefilename);
+	        } catch (Exception e) {  
+	            e.printStackTrace();  
+	        }  
+		
 		service.addstudent(s);
 		//model.addAttribute("stuId", s.getStuId());
 		return "manager/addstudent";		
@@ -314,10 +333,33 @@ public class ManagerController {
 	}
 /*删除违规信息*/
 	
-	@RequestMapping(value="/editviolation")
-	public String editviolation(Model modal,/*@RequestParam(name="violationHappentime",required=false)String violationHappentime,@RequestParam(name="violationEnteringtime",required=false)String violationEnteringtime,*/Violation v) throws ParseException{	
-		service.saveviolation(v);
-		return "manager/showallviolation";
+	/*@RequestMapping(value="/editviolation")
+	public void editviolation(Model modal,HttpServletRequest request,HttpServletResponse response,@RequestParam(name="violationId",required=false)Integer violationId,@RequestParam(name="violationHappentime",required=false)String violationHappentime,@RequestParam(name="violationEnteringtime",required=false)String violationEnteringtime,Violation v) throws ParseException{	
+		//service.saveviolation(v);
+		JSONObject jo=new JSONObject();		
+		try{
+		Integer violationId=Integer.parseInt(request.getParameter("violationId"));
+
+		service.editViolation(service.getvioaltionbyid(violationId));
+		jo.put("succ",true);
+		ResponseUtil.write(response, jo);
+		}catch(Exception e){
+			jo.put("succ",false);
+			try {
+				ResponseUtil.write(response, jo);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+		
+	}*/
+	@RequestMapping(value="/editviolation/{violationId}")
+	public void editviolation(Model modal,@PathVariable Integer violationId) throws ParseException{	
+		//service.saveviolation(v);
+		System.out.println("=======editviolation"+violationId);
+		
 	}
 	
 	/*添加投诉建议*/

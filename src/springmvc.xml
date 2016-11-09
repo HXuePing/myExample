@@ -46,11 +46,13 @@
   <mvc:default-servlet-handler/>
   
   <!-- 拦截器 -->
- 	 <mvc:interceptors>
+ 	 <!-- <mvc:interceptors>
   		<mvc:interceptor>
   		<mvc:mapping path="/manager/**"/>
   		<bean class="com.ping.interceptor.ManagerInterceptor"></bean>
   		</mvc:interceptor>
-  	</mvc:interceptors> 
+  	</mvc:interceptors>  -->
  		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+
 </beans>

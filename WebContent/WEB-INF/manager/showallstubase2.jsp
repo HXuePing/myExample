@@ -52,8 +52,9 @@
         <th field="stuStorey" width="50">所在层</th>
         <th field="stuTutor" width="50">老师</th>
         <th field="stuTutorPhone" width="50">学生</th>
-
+		 <th field="stuImage" width="40">学生照片</th>
     </tr>
+   
     </thead>
 </table>
 <div id="toolbar">

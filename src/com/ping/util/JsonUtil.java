@@ -27,6 +27,8 @@ public class JsonUtil {
 			mapOfColValues.put("stuStorey",s.getStuStorey());
 			mapOfColValues.put("stuTutor",s.getStuTutor());
 			mapOfColValues.put("stuTutorPhone",s.getStuTutorPhone());
+			mapOfColValues.put("stuImage","<a href='/myExample/upload/"+s.getStuImage()+"'>"+"查看图片"+"</a>");
+			//mapOfColValues.put("stuImage","<a href='/myExample/upload/1.jpg'>"+"查看图片"+"</a>");
 			array.add(mapOfColValues);
 		}
 		return array;

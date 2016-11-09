@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ping.domain.QueryResult;
 import com.ping.domain.Violation;
@@ -30,6 +33,13 @@ public class ViolationDao implements IViolationDao {
 		List<Violation> list=query.list();
 		return list;
 	}
+	public Violation getViolationbyId(Integer violationId){
+		Query query =getSession().createQuery("from Violation v where v.violationId=?");
+		query.setParameter(0,violationId);
+		Violation v=(Violation) query.uniqueResult();
+		return v;
+	}
+	
 	
 	public List<Violation> getAllViolation(){
 		Query query=getSession().createQuery("from Violation");
@@ -56,5 +66,23 @@ public class ViolationDao implements IViolationDao {
 		
 		return qr;	
 	}
+	
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public void editViolation(Violation v){
+		
+		Query query= getSession().createQuery("update Violation v set v.violationstuNumber=?,v.violationstuName=?,v.violationHappentime=?,v.violationEnteringtime=?,v.violationDeregulation=?,v.violationType=? where v.violationId=? ");
+		query.setParameter(0,v.getViolationstuNumber());
+		query.setParameter(1,v.getViolationstuName());	
+		query.setParameter(2,v.getViolationHappentime());
+		query.setParameter(3,v.getViolationEnteringtime());	
+		query.setParameter(4,v.getViolationDeregulation());
+		query.setParameter(5,v.getViolationType());	
+		query.setParameter(6,v.getViolationId());	
+		query.executeUpdate();		
+		
+	}
+	
+	
 	
 }

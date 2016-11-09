@@ -107,7 +107,8 @@ public class LoginController {
 		String pwd=request.getParameter("pwd");
 		Student s=service.findstudent(name,pwd);
     	Manager m=service.getManager(name,pwd);
-    	System.out.println(m+"hahah");
+    	System.out.println(m+"mhahah");
+    	System.out.println(s+"shahah");
     	if(m!=null){    		
     		jo.put("succ",true);
     		session.setAttribute("manager", m);

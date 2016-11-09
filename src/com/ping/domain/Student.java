@@ -22,7 +22,15 @@ public class Student {
 	private String stuTutor;
 	private String stuTutorPhone;
 			
+	private String stuImage;
 	
+	
+	public String getStuImage() {
+		return stuImage;
+	}
+	public void setStuImage(String stuImage) {
+		this.stuImage = stuImage;
+	}
 	public String getStuNumber() {
 		return stuNumber;
 	}

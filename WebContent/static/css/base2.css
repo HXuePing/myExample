@@ -10,6 +10,7 @@
 #header{
     height: 60px;
       background-color:#10218b;
+      width: 100%;
 }
 #logo{
     width:75px;
@@ -129,13 +130,16 @@ a:active {
    // background-color: #88B8FF;
      background-color:#10218b;
     color:#abbfe3 ;
+     width: 100%;
+
 }
 #footer-aa{
     text-align: center;
 }
 
 #right{   
-    width:1110px;
+  //  width:1110px;
+  width:900px;
      height: 490px;
    float: left;
    
@@ -145,7 +149,7 @@ a:active {
      width: 600px;
     height: 60px;
  	background-image: url("../images/text.jpg"); 
- 	float:right;
+ 	//float:right;
  	margin: 190px 210px;
 
 }
