@@ -15,8 +15,8 @@
             <div id="logo" ></div><div id="header-text1">学生宿舍管理系统</div>
             <div id="header-right">
                 欢迎你， <span class="username"><b>${stu.stuNumber }</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                [<a href="${pageContext.request.contextPath}/dorm/LoginSuccess" >首页</a>]
-                 [<a href="${pageContext.request.contextPath}/dorm/LoginOut">注销退出</a>]&nbsp;&nbsp;
+                [<a href="${pageContext.request.contextPath}/student/LoginIndex" target="" >首页</a>]
+                 [<a href="${pageContext.request.contextPath}/student/LoginOut">注销退出</a>]&nbsp;&nbsp;
             </div>
         </div>
     <div class="blank"></div>

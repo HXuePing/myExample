@@ -13,8 +13,10 @@
 	     <pattern>/manager/listroll</pattern>
 	     <pattern>/manager/listinfor</pattern>
 	       <pattern>/student/showpprove</pattern>
-	       
-	      	   	    
+	       <pattern>/student/LoginOut</pattern>	    
+	        <pattern>/student/LoginIndex</pattern>
+	        <pattern>/manager/LoginIndex</pattern>	 
+	         <pattern>/manager/LoginOut</pattern>
      </excludes>
      
      <decorator name="decorator" page="decorator.jsp">  <!-- 装饰文件 -->

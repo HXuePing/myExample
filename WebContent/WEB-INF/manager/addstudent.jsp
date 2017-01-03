@@ -62,7 +62,7 @@
 					  </div>
             <div style="margin-bottom:1px">
                 <div style="margin-top: 18px;margin-left: 50px">
-                   <button  class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</button>
+                   <button  class="easyui-linkbutton" data-options="">Save</button>
                    <!--  <a href="#" class="easyui-linkbutton" role="button" data-options="iconCls:'icon-save'">Save</a> -->
                 </div>
             </div>
@@ -132,7 +132,7 @@
 
                 <div style="margin-bottom:1px">
                     <div style="margin-top: 18px;margin-left: 50px">
-                     <button  class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</button>
+                     <button  class="easyui-linkbutton" data-options="">Save</button>
                        <%--  <a href="${pageContext.request.contextPath}/manager/addStudentRoll" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a> --%>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
 
                 <div style="margin-bottom:1px">
                     <div style="margin-top: 18px;margin-left: 50px">
-                     <button  class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</button>
+                     <button  class="easyui-linkbutton" data-options="">Save</button>
                         <!-- <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a> -->
                     </div>
                 </div>

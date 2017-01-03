@@ -30,7 +30,7 @@ public class LoginController {
 		return "newLogin";		
 	}
 	
-	@RequestMapping(value="/LoginOut")
+	/*@RequestMapping(value="/LoginOut")
 	public String loginout(HttpSession session){	
 		if(session.getAttribute("stu")!=null){
 			session.removeAttribute("stu");
@@ -39,7 +39,7 @@ public class LoginController {
 			session.removeAttribute("manager");
 		}
 		return "newLogin";		
-	}
+	}*/
 	@RequestMapping(value="/LoginIndex")
 	public String LoginIndex(){
 		return "manager/index";	

@@ -106,4 +106,17 @@ public class StudentDao implements IStudentDao {
 		
 	}
 	
+	//根据姓名查找
+	public List<Student> selectbyName(String name){
+		Query query=  getSession().createQuery("from Student s where s.stuName=?");
+		query.setParameter(0,name);
+		try {
+		List list=query.list();
+		return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
+	
 }

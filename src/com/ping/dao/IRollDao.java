@@ -13,4 +13,5 @@ public interface IRollDao {
 	public List<Roll> getAllRoll();
 	public Roll getRoll(Integer stuId);
 	public QueryResult  getpageroll(Integer startIndex,Integer pagesize);
+	public Roll rollselectbystunumber(String stuNumber);
 }

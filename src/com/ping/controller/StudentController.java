@@ -25,6 +25,20 @@ public class StudentController {
 	@Resource
 	IManagerService service;
 	
+	@RequestMapping(value="/LoginIndex")
+	public String LoginIndex(HttpSession session){	
+		return "student/sindex";		
+	}
+	
+	@RequestMapping(value="/LoginOut")
+	public String loginout(HttpSession session){	
+		if(session.getAttribute("stu")!=null){
+			session.removeAttribute("stu");
+		}
+		return "newLogin";		
+	}
+	
+	
 	@RequestMapping(value="/showOneStuBase")
 	public String showOneStuBase(Model model,HttpSession session){
 		

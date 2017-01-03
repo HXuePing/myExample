@@ -15,4 +15,5 @@ public interface IIformationDao {
 	public List<Information> getAllInformation();
 	public Information getInformation(Integer stuId);
 	public QueryResult getpageInformation(Integer startIndex,Integer pagesize);
+	public Information inforselectbystunumber(String stuNumber);
 }

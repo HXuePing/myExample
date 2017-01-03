@@ -23,7 +23,6 @@
 				//var result=+result;
 			//	var result=eval(result);
 			//var result=eval('('+result+')');
-				alert("aaaaaaaaaaaaaaaa");
 				if(result.errorMsg){
 					$.messager.alert("系统提示",result.errorMsg);
 				}else{
@@ -37,8 +36,18 @@
     </script>
 </head>
 <body>
-
-<div style="margin-left: 105px;margin-top: 60px;float:left;">
+<div align="center" style="margin-top:15px;">
+<form action="${pageContext.request.contextPath}/manager/SelectByCondition" method="post">
+条件查询：
+<select name="select">
+  <option value ="stuNumber" selected="selected">学号</option>
+  <option value ="stuName">姓名</option>
+</select>
+<input type="text" name="condition">
+<input type="submit" value="查询">
+</form>
+</div>
+<div style="margin-left: 105px;margin-top:25px;float:left;">
 <table id="dg" title="用户管理" class="easyui-datagrid" style="width:800px;height:365px"
        url="/myExample/manager/list"
        toolbar="#toolbar" pagination="true"

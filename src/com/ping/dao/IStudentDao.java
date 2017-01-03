@@ -17,4 +17,5 @@ public interface IStudentDao {
 	public Student findStudent(String stuNumber,String stuPassword);
 	public void updateStu(Integer stuId,String pwd);
 	public Student getStudentbyNumber(String stuNumber);
+	public List<Student> selectbyName(String name);
 }

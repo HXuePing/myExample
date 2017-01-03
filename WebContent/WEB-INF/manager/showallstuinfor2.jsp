@@ -11,7 +11,7 @@
         $("#dlg2").dialog('open').dialog('setTitle','批量导入数据');
     }
     function exportUser(){
-        window.open('/myExample/manager/Export');
+        window.open('/myExample/manager/ExportInfor');
     }
     </script>
     <style>
@@ -19,7 +19,17 @@
     </style>
 </head>
 <body>
-<div style="margin-left: 105px;margin-top: 60px;float:left;">
+<div align="center" style="margin-top:15px;">
+<form action="${pageContext.request.contextPath}/manager/InforSelectByCondition" method="post">
+条件查询：
+<select name="select">
+  <option value ="stuNumber" selected="selected">学号</option>
+</select>
+<input type="text" name="condition">
+<input type="submit" value="查询">
+</form>
+</div>
+<div style="margin-left: 105px;margin-top:25px;float:left;">
 <table id="dg" title="用户管理" class="easyui-datagrid" style="width:900px;height:365px"
        url="/myExample/manager/listinfor"
        toolbar="#toolbar" pagination="true"

@@ -3,8 +3,9 @@ package com.ping.controller;
 
 import java.io.File;
 import java.text.ParseException;
-
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
 import com.ping.domain.Information;
 import com.ping.domain.Manager;
 import com.ping.domain.PageBean;
@@ -47,6 +47,64 @@ public class ManagerController {
 	
 	@Resource
 	IManagerService service;
+	
+	@RequestMapping(value="/SelectByCondition")
+	public String SelectByCondition(Model model,@RequestParam(required = false) String select,@RequestParam(required = false) String condition){	
+		
+		if(select.equals("stuNumber")){
+			Student s=service.getstudentbunumber(condition);
+			model.addAttribute("s", s);
+			return "manager/showonestubase";
+		}
+		if(select.equals("stuName")){
+			List list=service.selectbyName(condition);
+			model.addAttribute("list",list);
+			return "manager/showmorestubase";
+		}
+		
+		return null;		
+	}
+	
+	@RequestMapping(value="/RollSelectByCondition")
+	public String RollSelectByCondition(Model model,@RequestParam(required = false) String select,@RequestParam(required = false) String condition){	
+		
+		if(select.equals("stuNumber")){
+			Roll roll=service.rollselectbyStuNumber(condition);			
+			model.addAttribute("roll", roll);
+			return "manager/showoneroll";
+		}
+		
+		return null;		
+	}
+	
+	
+	@RequestMapping(value="/InforSelectByCondition")
+	public String InforSelectByCondition(Model model,@RequestParam(required = false) String select,@RequestParam(required = false) String condition){	
+		
+		if(select.equals("stuNumber")){
+			Information infor=service.inforselectbystuNumber(condition);
+			System.out.println("==========="+infor);
+			model.addAttribute("information",infor);
+			return "manager/showoneinfor";
+		}
+		
+		return null;		
+	}
+	
+	
+	@RequestMapping(value="/LoginIndex")
+	public String LoginIndex(){	
+		return "manager/index";		
+	}
+	
+	
+	@RequestMapping(value="/LoginOut")
+	public String loginout(HttpSession session){	
+		if(session.getAttribute("manager")!=null){
+			session.removeAttribute("manager");
+		}
+		return "newLogin";		
+	}
 
 	@RequestMapping(value="/addStudentBasePage")
 	public String addStudentBasePage(){	
@@ -237,6 +295,30 @@ public class ManagerController {
 		ResponseUtil.export(response, wb,"xuexi.xls");
 		return null;	
 	}
+	/*导出信息*/	
+	@RequestMapping(value="/ExportRoll")
+	public String ExportRoll(HttpServletResponse response) throws Exception{		
+		
+		Workbook wb=new HSSFWorkbook();		
+		String headers[]={"身份证号", "生源地","班号","婚姻状态","民族","政治面貌","专业","准考证号","入学年份","毕业年份","单位"};
+		
+		List<Roll> list=service.getallroll();
+		ExcelUtil.fillExcelDataRoll(list, wb, headers);
+		ResponseUtil.export(response, wb,"xuexi.xls");
+		return null;	
+	}
+	/*导出信息*/	
+	@RequestMapping(value="/ExportInfor")
+	public String ExportInfor(HttpServletResponse response) throws Exception{		
+		
+		Workbook wb=new HSSFWorkbook();		
+		String headers[]={"地址", "邮政编码","邮箱","家庭号码","长号","QQ号","短号"};
+		
+		List<Information> list=service.getallinformation();
+		ExcelUtil.fillExcelDataInformation(list, wb, headers);
+		ResponseUtil.export(response, wb,"xuexi.xls");
+		return null;	
+	}
 	
 	/*导入信息*/
 	@RequestMapping(value="/upload")
@@ -327,11 +409,30 @@ public class ManagerController {
 	/*添加违规信息*/
 	
 	@RequestMapping(value="/addviolation")
-	public String addviolation(Model modal,/*@RequestParam(name="violationHappentime",required=false)String violationHappentime,@RequestParam(name="violationEnteringtime",required=false)String violationEnteringtime,*/Violation v) throws ParseException{
+	public String addviolation(Model modal,HttpServletRequest request/*@RequestParam(name="violationHappentime",required=false)String violationHappentime,@RequestParam(name="violationEnteringtime",required=false)String violationEnteringtime,*/) throws ParseException{
+		String violationstuNumber=request.getParameter("violationstuNumber");
+		String violationstuName=request.getParameter("violationstuName");
+		String violationHappentime=request.getParameter("violationHappentime");
+		String violationEnteringtime=request.getParameter("violationEnteringtime");
+		String violationDeregulation=request.getParameter("violationDeregulation");
+		String violationType=request.getParameter("violationType");
+		Violation v=new Violation();
+		v.setViolationId(14);
+		v.setViolationDeregulation(violationDeregulation);
+		v.setViolationHappentime(new Date());
+		v.setViolationEnteringtime(new Date());
+		v.setViolationstuName(violationstuName);
+		v.setViolationstuNumber(violationstuNumber);
+		v.setViolationType(violationType);
 		service.saveviolation(v);		
 		return "manager/showallviolation";
 	}
 /*删除违规信息*/
+	@RequestMapping(value="/deleteviolation")
+	public String deleteviolation(Model modal,HttpServletRequest request/*@RequestParam(name="violationHappentime",required=false)String violationHappentime,@RequestParam(name="violationEnteringtime",required=false)String violationEnteringtime,*/) throws ParseException{
+		service.deletevio();
+		return "manager/showallviolation";
+	}
 	
 	/*@RequestMapping(value="/editviolation")
 	public void editviolation(Model modal,HttpServletRequest request,HttpServletResponse response,@RequestParam(name="violationId",required=false)Integer violationId,@RequestParam(name="violationHappentime",required=false)String violationHappentime,@RequestParam(name="violationEnteringtime",required=false)String violationEnteringtime,Violation v) throws ParseException{	
@@ -358,8 +459,7 @@ public class ManagerController {
 	@RequestMapping(value="/editviolation/{violationId}")
 	public void editviolation(Model modal,@PathVariable Integer violationId) throws ParseException{	
 		//service.saveviolation(v);
-		System.out.println("=======editviolation"+violationId);
-		
+		service.editViolation(service.getvioaltionbyid(violationId));
 	}
 	
 	/*添加投诉建议*/

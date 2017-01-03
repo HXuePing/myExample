@@ -71,4 +71,17 @@ public class InformationDao implements IIformationDao {
 		return qr;			
 	}
 	
+	//根据学号查找信息
+	public Information inforselectbystunumber(String stuNumber){
+		Query query=(Query) getSession().createQuery("from Information r where r.student.stuNumber=?");
+		query.setParameter(0,stuNumber);
+		try{
+			Information information=(Information) query.uniqueResult();
+			return information;
+		}catch(Exception e){
+			return null;
+		}		
+				
+	}
+	
 }

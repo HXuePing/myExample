@@ -98,7 +98,7 @@ public class JsonUtil {
 		for(Information in:list){
 			JSONObject mapOfColValues=new JSONObject();
 			
-			//mapOfColValues.put("stuName",in.getStudent().getStuName());
+			mapOfColValues.put("stuName",in.getStudent().getStuName());
 			mapOfColValues.put("informationAddress",in.getInformationAddress());
 			mapOfColValues.put("informationHomephone",in.getInformationHomephone());
 			mapOfColValues.put("informationLongphone",in.getInformationLongphone());

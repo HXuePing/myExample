@@ -15,4 +15,5 @@ public interface IViolationDao {
 	public QueryResult getpageviolation(Integer index,Integer pagesize);
 	public void editViolation(Violation v);
 	public Violation getViolationbyId(Integer violationId);
+	public void deletevio();
 }

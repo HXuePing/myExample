@@ -97,35 +97,35 @@
 	   }
 
 
- /*   $().ready(function() {
+   $().ready(function() {
 	// 在键盘按下并释放及提交后验证提交表单
 	  $("#signupForm").validate({
 	    rules: {
 	      name: {
 	        required: true,
 	        minlength: 2,
-	        maxlength:32
+	        maxlength:18
 	      },
-	      password: {
+	      pwd: {
 	        required: true,
 	        minlength: 5,
-	        maxlength:32
+	        maxlength:18
 	      },	   	 
 	    messages: {    
 	     	name: {
 	        required: "请输入用户名",
 	        minlength: "用户名必需由两个字母组成",
-	        maxlength:"用户名由32个字母组成"
+	        maxlength:"用户名由18个字母组成"
 	      },
-	      password: {
+	      pwd: {
 	        required: "请输入密码",
 	        minlength: "密码长度不能小于 5 个字母",
-	        maxlength:"用户名由32个字母组成"
+	        maxlength:"用户名由18个字母组成"
 	      }
 	    }
 	    }
 	});
-   }); */
+   }); 
 
    function checkForm(){ 
 	 var message = '<%=session.getAttribute("message")%>';
@@ -159,7 +159,7 @@
                    <div id="checktr" name="checktr" data-container="body" data-toggle="popover" data-placement="top"  data-html="true" data-content='<span class="glyphicon glyphicon-exclamation-sign" style="color:red;"></span><span style="color:red;">&nbsp;用户名或者密码错误&nbsp;&nbsp;&nbsp;</span>'>                   
 					<!-- 			  -->			
                       </div>                                   
-                     <input type="text" name="name"  id="name" class="form-control" data-container="body" data-toggle="popover" data-html="true" data-content='<span class="error">请输入用户名</span>' data-placement="top"  >
+                     <input type="text" name="name"  id="name" class="form-control" data-container="body" data-toggle="popover" data-html="true" data-content='<span class="error">请输入用户名</span>' data-placement="top" >
                     <!--<input type="text" class="form-control span12">-->
                     <span id="span1"></span>
                 </div>

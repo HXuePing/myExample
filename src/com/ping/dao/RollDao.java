@@ -35,6 +35,20 @@ public class RollDao implements IRollDao {
 		return list;				
 	}
 	
+	//根据学号查找学籍
+	public Roll rollselectbystunumber(String stuNumber){
+		Query query =(Query) getSession().createQuery("from Roll r where r.student.stuNumber=?");
+		query.setParameter(0,stuNumber);
+		try{
+			Roll roll=(Roll) query.uniqueResult();
+			return roll;
+		}catch(Exception e){
+			return null;	
+		}			
+	}
+	
+	
+	
 	public Roll getRoll(Integer stuId){
 		Query query =(Query) getSession().createQuery("from Roll r where r.student.stuId=?");
 		query.setParameter(0, stuId);

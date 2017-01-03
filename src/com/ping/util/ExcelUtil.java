@@ -11,6 +11,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import com.ping.domain.Information;
+import com.ping.domain.Roll;
 import com.ping.domain.Student;
 
 public class ExcelUtil {
@@ -68,6 +70,51 @@ public class ExcelUtil {
 			}else{
 				return String.valueOf(hssfCell.getStringCellValue());
 			}
+		}
+		
+	}
+	public static void fillExcelDataRoll(List<Roll> list, Workbook wb, String[] headers) {
+		int rowIndex=0;
+		Sheet sheet=wb.createSheet();
+		Row row=sheet.createRow(rowIndex++);
+		for(int i=0;i<headers.length;i++){
+			row.createCell(i).setCellValue(headers[i]);
+		}
+		for(Roll r:list){
+			row=sheet.createRow(rowIndex++);				
+			row.createCell(0).setCellValue(r.getRollIdCard());	
+			row.createCell(1).setCellValue(r.getRollAddress());
+			row.createCell(2).setCellValue(r.getRollClass());	
+			row.createCell(3).setCellValue(r.getRollMarriage());	
+			row.createCell(4).setCellValue(r.getRollNation());
+			row.createCell(5).setCellValue(r.getRollPoliticalstatus());	
+			row.createCell(6).setCellValue(r.getRollProfession());	
+			row.createCell(7).setCellValue(r.getRollRegistTrationNumber());
+			row.createCell(8).setCellValue(r.getRollStartdate());	
+			row.createCell(9).setCellValue(r.getRollEnddate());	
+			row.createCell(10).setCellValue(r.getRollUnit());
+			
+		}
+		
+	}
+	public static void fillExcelDataInformation(List<Information> list, Workbook wb, String[] headers) {
+		int rowIndex=0;
+		Sheet sheet=wb.createSheet();
+		Row row=sheet.createRow(rowIndex++);
+		for(int i=0;i<headers.length;i++){
+			row.createCell(i).setCellValue(headers[i]);
+		}
+		for(Information i:list){
+			row=sheet.createRow(rowIndex++);				
+			row.createCell(0).setCellValue(i.getInformationAddress());	
+			row.createCell(1).setCellValue(i.getInformationCode());
+			row.createCell(2).setCellValue(i.getInformationEmail());	
+			row.createCell(3).setCellValue(i.getInformationHomephone());	
+			row.createCell(4).setCellValue(i.getInformationLongphone());
+			row.createCell(5).setCellValue(i.getInformationShortphone());	
+			row.createCell(6).setCellValue(i.getInformationQq());	
+			
+			
 		}
 		
 	}

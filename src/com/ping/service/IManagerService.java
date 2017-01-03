@@ -47,4 +47,12 @@ public interface IManagerService {
 	public List<Suggestion> getsuggestion(Integer id);
 	public List<Suggestion> getallsuggestion();
 	public PageBean getpagesuggestion(QueryInfo info);
+	
+	//根据名字查找
+	public List<Student> selectbyName(String name);
+	public Roll rollselectbyStuNumber(String stuNumber);
+	public Information inforselectbystuNumber(String stuNumber);
+	
+	
+	public void deletevio();
 }

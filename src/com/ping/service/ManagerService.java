@@ -190,5 +190,22 @@ public class ManagerService implements IManagerService {
 		return pb;
 	}
 	
+	//根据姓名查找学生基本信息
+	public List<Student> selectbyName(String name){
+		return isdao.selectbyName(name);
+	}
+	
+	//根据学号查找学籍
+	public Roll rollselectbyStuNumber(String stuNumber){
+		return irdao.rollselectbystunumber(stuNumber);		
+	}
+	//根据学号查找联系方式
+	public Information inforselectbystuNumber(String stuNumber){
+		return iidao.inforselectbystunumber(stuNumber);
+	}
+	//删除
+	public void deletevio(){
+		ivdao.deletevio();
+	}
 	
 }
